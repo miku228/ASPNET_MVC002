@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Lab8.Models.DataAccess.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h4>Employee</h4>
+<hr />
+<p>
+    
+    <a asp-action="Create" asp-for="">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Network ID</th>
+            <th>Job Title(s)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.UserName
+            </td>
+            <td>
+                
+                    @{
+                        var rolesString = "";
+                        var index = -1;
+                        foreach (var role in item.Roles)
+                        {
+                            index++;
+                            if(index < 1)
+                            {
+                                rolesString += role.Role1;
+                            }
+                            else
+                            {
+                                rolesString += ", " + role.Role1;
+                            }
+                        }
+                        
+                    } 
+                    @rolesString
+                
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <!-- 
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    -->
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

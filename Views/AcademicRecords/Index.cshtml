@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Lab8.Models.DataAccess.AcademicRecord>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h4>AcademicRecord</h4>
+<hr />
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                <a asp-page="" asp-route-orderby="course"><label>Course</label></a>
+            </th>
+            <th>
+                <a asp-page="" asp-route-orderby="student"><label>@Html.DisplayNameFor(model => model.Student)</label></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th><a asp-action="EditAll"><label>Edit All</label></a></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseCodeNavigation.DisplayText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.DisplayText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { studentId=item.StudentId, courseCode=item.CourseCode }) 
+                <!-- 
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                -->
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

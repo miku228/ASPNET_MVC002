@@ -1,0 +1,94 @@
+﻿<!-- IEnumerable<Lab8.Models.DataAccess.AcademicRecord>  -->
+@model IList<Lab8.Models.DataAccess.AcademicRecord>
+
+@{
+    ViewData["Title"] = "EditAll";
+}
+
+<h1>EditAll</h1>
+
+<h4>AcademicRecord</h4>
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th>
+                            <!-- <a asp-page="" asp-route-orderby="course"><label>Course</label></a> -->
+                            <label>Course</label>
+                        </th>
+                        <th>
+                            <!-- <a asp-page="" asp-route-orderby="student"><label>Student</label></a> -->
+                            <label>Student</label>
+                        </th>
+                        <th>
+                            <label>Grade</label>
+                            <!-- Html.DisplayNameFor(model => model.Grade) -->
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--for(var i = 0; i < Model.Count(); i++)-->
+                    @for (var i = 0; i < Model.Count(); i++)
+                    //foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                <input type="hidden" asp-for="@Model[i].CourseCode" />
+                                @Model[i].CourseCodeNavigation.DisplayText
+                                <!--
+                                <input type="hidden" asp-for="item.CourseCode" />
+                                CourseCodeNavigation.DisplayText -->
+                                
+                            </td>
+                            <td>
+                                <input type="hidden" asp-for="@Model[i].StudentId" />
+                                @Model[i].Student.DisplayText
+                                <!--
+                                <input type="hidden" asp-for="item.StudentId" />
+                                item.Student.DisplayText -->
+                            </td>
+                            <td>
+                                <input class="form-control" asp-for="@Model[i].Grade" />
+                                <!-- 
+                                <input asp-for="item.Grade" class="form-control" />
+                                 -->
+                            </td>
+                            <td>
+                                <span asp-validation-for="@Model[i].Grade" class="text-danger"></span>
+                                <!-- 
+                                <span asp-validation-for="item.Grade" class="text-danger"></span>
+                                -->
+                            </td>
+               
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!-- ************** -->
+            <!-- submit buttons -->
+            <!-- ************** -->
+            <div class="form-group">
+                <input type="submit" value="Save"  class="btn btn-primary" />
+                <input type="reset" value="Cancel" class="btn btn-primary" onclick=" return FormCancel(); " />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        function FormCancel() {
+            return window.location.href = '/AcademicRecords';
+        }
+    </script>
+}
+
+
+
